@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: greeter
+  labels: &labels
+    app: greeter
+spec:
+  selector:
+    # to avoid missing label selectors use YAML aliases
+    matchLabels: *labels
+  template:
+    metadata:
+      labels: *labels
+      # Enabling the Image Lookup for the Interna Registry
+      annotations: 
+        alpha.image.policy.openshift.io/resolve-names: '*'
+    spec:
+      containers:
+        - name: greeter
+          imagePullPolicy: Always
+          #image: quarkus-greet:latest
+          image: image-registry.openshift-image-registry.svc:5000/tekton-demo/quarkus-greet
+          resources:
+            limits:
+              memory: "750Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 8080
