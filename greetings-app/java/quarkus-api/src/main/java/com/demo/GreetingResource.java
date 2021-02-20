@@ -11,6 +11,6 @@ public class GreetingResource {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String hello() {
-        return "Tekton Trigger Demo Advanced With Nexus !!";
+        return "Tekton Trigger Demo Advanced With Nexus #2 !!";
     }
 }
